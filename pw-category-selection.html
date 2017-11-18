@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="pw-category-selection">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `pw-category-selection`
+     * Contains cards with selectable categories to save them in a user&#39;s profile.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PwCategorySelection extends Polymer.Element {
+      static get is() { return 'pw-category-selection'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'pw-category-selection'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PwCategorySelection.is, PwCategorySelection);
+  </script>
+</dom-module>
