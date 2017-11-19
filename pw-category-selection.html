@@ -1,4 +1,9 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../pw-category-card/pw-category-card.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
 
 <dom-module id="pw-category-selection">
   <template>
@@ -6,8 +11,44 @@
       :host {
         display: block;
       }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      pw-category-card {
+        margin: 10px;
+      }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+    <template is="dom-repeat" items="{{catalog}}" as="category"> 
+      <div class="container">
+        <pw-category-card 
+          text="[[category.name]]"
+          image="[[category.headerImg]]"
+          items="{{category.subCategory}}"
+          on-click-item="_addSubCategory">
+        </pw-category-card>        
+      </div>
+    </template>
+
+    <div class="divsubmit">
+      <h3>Categorias Seleccionadas:</h3>
+      <paper-listbox>
+          <template
+            is="dom-repeat"
+            items="[[subCategorySelected]]"
+            as="subcatselected"
+            id="idSubCatSelected">
+            <paper-item>[[subcatselected]]</paper-item>
+          </template>
+      </paper-listbox>
+      <paper-button on-click="_saveCategories" raised class="indigo">GUARDAR</paper-button>
+    </div>
+    
+
   </template>
 
   <script>
@@ -23,11 +64,36 @@
       static get is() { return 'pw-category-selection'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'pw-category-selection'
+          catalog: {
+            type: Array,
+            value: []
+          },
+          subCategorySelected: {
+            type: Array,
+            notify: true,
+            value: []
           }
-        };
+        };        
+      }
+
+      _addSubCategory(event) {
+        let item = this.subCategorySelected.filter(i => {
+          if(event.detail === i) {
+            return i;
+          }
+        });
+        if (item.length === 0) {
+          this.subCategorySelected.push(event.detail);
+        } 
+        this.$.idSubCatSelected.render();
+      }
+
+      _saveCategories() {
+        this.dispatchEvent(new CustomEvent('save-categories',{
+          bubbles: true,
+          composed: true,
+          detail: this.subCategorySelected
+        }));      
       }
     }
 
