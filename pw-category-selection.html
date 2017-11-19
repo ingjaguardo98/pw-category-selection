@@ -77,7 +77,7 @@
 
       _addSubCategory(event) {
         let item = this.subCategorySelected.filter(i => {
-          if(event.detail.subcategory === i) {
+          if(event.detail.subCategory === i.subCategory) {
             return i;
           }
         });
