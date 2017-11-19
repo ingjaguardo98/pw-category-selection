@@ -3,7 +3,7 @@
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-button/paper-button.html">
-
+<link rel="import" href="../isw-dialog/isw-dialog.html">
 
 <dom-module id="pw-category-selection">
   <template>
@@ -46,6 +46,12 @@
           </template>
       </paper-listbox>
       <paper-button on-click="_saveCategories" raised>GUARDAR</paper-button>
+
+      <isw-dialog id="dialog">
+        <div>Categorias Guardadas</div>
+        <paper-button dialog-dismiss>Cancel</paper-button>
+      </isw-dialog>
+
     </div>
     
 
@@ -97,7 +103,8 @@
           bubbles: true,
           composed: true,
           detail: this.subCategorySelected
-        }));      
+        }));
+        this.$.dialog.open();
       }
 
       _isNotEqualTo(category, string) {
