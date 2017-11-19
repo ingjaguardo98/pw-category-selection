@@ -1,11 +1,11 @@
 {
   "name": "pw-category-selection",
   "description": "Contains cards with selectable categories to save them in a user&#39;s profile.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "pw-category-selection.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.2.0",
-    "pw-category-card": "https://github.com/yhoshua8a/pw-category-card.git#1.0.2",
+    "pw-category-card": "https://github.com/yhoshua8a/pw-category-card.git#1.0.3",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-button": "polymerElements/paper-button#^2.0.0"
   },

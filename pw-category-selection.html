@@ -11,13 +11,11 @@
       :host {
         display: block;
       }
-
       .container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
       }
-
       pw-category-card {
         margin: 10px;
       }
@@ -42,7 +40,7 @@
             items="[[subCategorySelected]]"
             as="subcatselected"
             id="idSubCatSelected">
-            <paper-item>[[subcatselected]]</paper-item>
+            <paper-item>[[subcatselected.subcategory]]</paper-item>
           </template>
       </paper-listbox>
       <paper-button on-click="_saveCategories" raised class="indigo">GUARDAR</paper-button>
@@ -78,7 +76,7 @@
 
       _addSubCategory(event) {
         let item = this.subCategorySelected.filter(i => {
-          if(event.detail === i) {
+          if(event.detail.subcategory === i) {
             return i;
           }
         });
@@ -86,6 +84,7 @@
           this.subCategorySelected.push(event.detail);
         } 
         this.$.idSubCatSelected.render();
+        console.log(this.subCategorySelected);
       }
 
       _saveCategories() {
@@ -96,7 +95,6 @@
         }));      
       }
     }
-
     window.customElements.define(PwCategorySelection.is, PwCategorySelection);
   </script>
 </dom-module>
