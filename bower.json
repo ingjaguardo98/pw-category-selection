@@ -1,7 +1,7 @@
 {
   "name": "pw-category-selection",
   "description": "Contains cards with selectable categories to save them in a user&#39;s profile.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "pw-category-selection.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.2.0",

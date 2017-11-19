@@ -23,13 +23,14 @@
 
     <template is="dom-repeat" items="{{catalog}}" as="category"> 
       <div class="container">
-        <pw-category-card 
-          text="[[category.name]]"
-          image="[[category.headerImg]]"
-          items="{{category.subCategory}}"
-          on-click-item="_addSubCategory">
-        </pw-category-card>
-
+        <template is="dom-if" if="{{_isNotEqualTo(category.name, notCategory)}}">               
+          <pw-category-card 
+            text="[[category.name]]"
+            image="[[category.headerImg]]"
+            items="{{category.subCategory}}"
+            on-click-item="_addSubCategory">
+          </pw-category-card>
+        </template>
       </div>
     </template>
 
@@ -44,7 +45,7 @@
             <paper-item>[[subcatselected.subCategory]]</paper-item>
           </template>
       </paper-listbox>
-      <paper-button on-click="_saveCategories" raised class="indigo">GUARDAR</paper-button>
+      <paper-button on-click="_saveCategories" raised>GUARDAR</paper-button>
     </div>
     
 
@@ -71,6 +72,10 @@
             type: Array,
             notify: true,
             value: []
+          },
+          notCategory: {
+            type: String,
+            value: ''
           }
         };        
       }
@@ -93,6 +98,10 @@
           composed: true,
           detail: this.subCategorySelected
         }));      
+      }
+
+      _isNotEqualTo(category, string) {
+        return category != string;
       }
     }
     window.customElements.define(PwCategorySelection.is, PwCategorySelection);
